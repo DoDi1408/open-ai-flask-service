@@ -9,4 +9,5 @@ RUN pip install -r requirements.txt
 #copy files in src
 COPY src/ ./
 
+EXPOSE 9000
 ENTRYPOINT ["python","api.py"] 

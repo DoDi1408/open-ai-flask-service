@@ -20,8 +20,6 @@ spec:
         - containerPort: 9000
         envFrom:
         - secretRef:
-            name: bot-info
-        - secretRef:
             name: open-ai-secret
       imagePullSecrets:  
       - name: ocirsecret  
