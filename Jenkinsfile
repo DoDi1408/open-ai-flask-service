@@ -3,6 +3,7 @@ pipeline {
     environment {
         OCI_CREDENTIALS = credentials('oci-user-authtoken')
         BOT_CREDENTIALS = credentials('d04f8052-8f74-4c4e-9617-c24969d413c7')
+        PATH = "/home/jenkins/bin:${env.PATH}"
     }
     stages{
         stage('Build docker image'){

@@ -14,13 +14,15 @@ spec:
     spec:
       containers:
       - name: openai-flask
-        image: qro.ocir.io/ax6svbbnc2oh/registry-java-bot:latest ##pending
+        image: qro.ocir.io/ax6svbbnc2oh/open-ai-flask-app:latest 
         imagePullPolicy: Always
         ports:
         - containerPort: 9000
         envFrom:
         - secretRef:
             name: bot-info
+        -secretRef:
+            name: open-ai-secret
       imagePullSecrets:  
       - name: ocirsecret  
 ---

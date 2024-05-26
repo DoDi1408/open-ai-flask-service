@@ -8,4 +8,4 @@ RUN pip install -r requirements.txt
 #copy files in src
 COPY src/ ./
 
-CMD ["flask --app api run"]
+CMD ["python api.py"]
