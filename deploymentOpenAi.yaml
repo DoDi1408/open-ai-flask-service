@@ -21,7 +21,7 @@ spec:
         envFrom:
         - secretRef:
             name: bot-info
-        -secretRef:
+        - secretRef:
             name: open-ai-secret
       imagePullSecrets:  
       - name: ocirsecret  
