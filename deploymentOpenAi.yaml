@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: openai-flask-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: openai-flask
+  template:
+    metadata:
+      labels:
+        app: openai-flask
+    spec:
+      containers:
+      - name: openai-flask
+        image: qro.ocir.io/ax6svbbnc2oh/registry-java-bot:latest ##pending
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 9000
+        envFrom:
+        - secretRef:
+            name: bot-info
+      imagePullSecrets:  
+      - name: ocirsecret  
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: openai-flask-service
+spec:
+  type: ClusterIP
+  ports:
+  - port: 8080
+    protocol: TCP
+    targetPort: 9000
+  selector:
+    app: openai-flask

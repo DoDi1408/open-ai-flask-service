@@ -23,6 +23,6 @@ def get_task_JSON():
 
 if __name__ == "__main__":
     from waitress import serve
-    PORT = 8080
+    PORT = 9000
     print("Running server on port: " + str(PORT))
     serve(app, host="0.0.0.0", port=PORT)
