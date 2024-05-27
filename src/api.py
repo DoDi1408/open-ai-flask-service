@@ -17,8 +17,9 @@ def get_task_JSON():
             {"role": "user", "content": task_message}
         ]
     )
+    task_data = response.choices[0].message.content
     print("returning: " + response.choices[0].message.content)
-    return response.choices[0].message.content, 200
+    return jsonify(task_data), 200
 
 
 if __name__ == "__main__":
