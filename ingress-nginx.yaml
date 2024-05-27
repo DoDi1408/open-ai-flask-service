@@ -15,16 +15,6 @@ spec:
               name: javabot-springboot-service
               port:
                 number: 8080
-  - host: "bot.romongo.uk"
-    http:
-      paths:
-        - pathType: Prefix
-          path: "/"
-          backend:
-            service:
-              name: openai-flask-service
-              port:
-                number: 5134
   - host: "frontend.romongo.uk"
     http:
       paths:
