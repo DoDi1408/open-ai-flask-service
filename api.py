@@ -42,7 +42,7 @@ def get_task_JSON():
     )
     task_data = response.choices[0].message.content
     app.logger.info("returning:" + task_data)
-    return task_data, 200
+    return task_data, 200, {'Content-Type': 'application/json'}
 
 
 if __name__ == "__main__":
