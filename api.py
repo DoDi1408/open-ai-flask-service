@@ -39,7 +39,7 @@ def get_task_JSON():
         messages=[
             {"role": "system", "content": "The current time is: " + str(datetime.datetime.now())},
             {"role": "system", "content": "You are a helpful assistant designed to output JSON. IT MUST have the following attributes. startDate, dueDate, description, title, stateTask (this one is always 0), and employee (this one is always null)"},
-            {"role": "system", "content": "dueDate can be null if you can't find it in the incoming messages."},
+            {"role": "system", "content": "If you can't find dueDate in the incoming message, assign due date to be a week later."},
             {"role": "user", "content": task_message}
         ]
     )
