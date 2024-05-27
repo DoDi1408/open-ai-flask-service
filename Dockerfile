@@ -5,9 +5,7 @@ COPY requirements.txt ./
 #install packages
 RUN pip install -r requirements.txt
 
-#ENV OPENAI_API_KEY= an open ai key (should use secrets in prod")
-#copy files in src
-COPY src/ ./
+COPY api.py .
 
 EXPOSE 9000
 ENTRYPOINT ["python","api.py"] 

@@ -1,5 +1,22 @@
+from logging.config import dictConfig
 from flask import Flask, jsonify, request
 from openai import OpenAI
+
+dictConfig({
+    'version': 1,
+    'formatters': {'default': {
+        'format': '[%(asctime)s] %(levelname)s in %(module)s: %(message)s',
+    }},
+    'handlers': {'wsgi': {
+        'class': 'logging.StreamHandler',
+        'stream': 'ext://flask.logging.wsgi_errors_stream',
+        'formatter': 'default'
+    }},
+    'root': {
+        'level': 'INFO',
+        'handlers': ['wsgi']
+    }
+})
 
 client = OpenAI()
 
@@ -7,10 +24,12 @@ app = Flask(__name__)
 
 @app.route("/")
 def test():
+    app.logger.info('received a /')
     return "Hello, WORLD!!", 200
 
 @app.route("/task", methods=['POST'])
 def get_task_JSON():
+    app.logger.info('received a /task')
     task_message = request.get_data(as_text=True)
     response = client.chat.completions.create(
         model="gpt-3.5-turbo-0125",
@@ -22,12 +41,11 @@ def get_task_JSON():
         ]
     )
     task_data = response.choices[0].message.content
-    print("returning: " + response.choices[0].message.content)
+    app.logger.info("returning:" + task_data)
     return task_data, 200
 
 
 if __name__ == "__main__":
     from waitress import serve
     PORT = 9000
-    print("Running server on port: " + str(PORT))
     serve(app, host="0.0.0.0", port=PORT)
