@@ -1,6 +1,7 @@
 from logging.config import dictConfig
 from flask import Flask, jsonify, request
 from openai import OpenAI
+import datetime
 
 dictConfig({
     'version': 1,
@@ -36,7 +37,9 @@ def get_task_JSON():
         temperature=0.3,
         response_format={ "type": "json_object" },
         messages=[
+            {"role": "system", "content": "The current time is: " + datetime.datetime.now()},
             {"role": "system", "content": "You are a helpful assistant designed to output JSON. IT MUST have the following attributes. startDate, dueDate, description, title, stateTask (this one is always 0), and employee (this one is always null)"},
+            {"role": "system", "content": "dueDate can be null if you can't find it in the incoming messages."},
             {"role": "user", "content": task_message}
         ]
     )
