@@ -47,5 +47,5 @@ def get_task_JSON():
 
 if __name__ == "__main__":
     from waitress import serve
-    PORT = 9000
+    PORT = 5134
     serve(app, host="0.0.0.0", port=PORT)
