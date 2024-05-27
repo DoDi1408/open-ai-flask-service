@@ -5,6 +5,10 @@ client = OpenAI()
 
 app = Flask(__name__)
 
+@app.route("/")
+def test():
+    return "Hello, WORLD!!", 200
+
 @app.route("/task", methods=['POST'])
 def get_task_JSON():
     task_message = request.get_data(as_text=True)
@@ -19,7 +23,7 @@ def get_task_JSON():
     )
     task_data = response.choices[0].message.content
     print("returning: " + response.choices[0].message.content)
-    return jsonify(task_data), 200
+    return task_data, 200
 
 
 if __name__ == "__main__":
