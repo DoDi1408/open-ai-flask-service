@@ -9,7 +9,7 @@ pipeline {
         stage('Build docker image'){
             steps{
                 script{
-                    sh "docker build -t open-ai-flask-app:${BUILD_NUMBER}-${GIT_COMMIT} ."
+                    sh "docker build -t open-ai-flask-app:latest ."
                 }
             }
         }
@@ -17,8 +17,8 @@ pipeline {
             steps{
                 script{
                     sh 'echo ${OCI_CREDENTIALS_PSW} | docker login --username ${OCI_CREDENTIALS_USR} --password-stdin qro.ocir.io'
-                    sh "docker tag open-ai-flask-app:${BUILD_NUMBER}-${GIT_COMMIT} qro.ocir.io/ax6svbbnc2oh/open-ai-flask-app:${BUILD_NUMBER}-${GIT_COMMIT}"
-                    sh "docker push qro.ocir.io/ax6svbbnc2oh/open-ai-flask-app:${BUILD_NUMBER}-${GIT_COMMIT}"
+                    sh "docker tag open-ai-flask-app:latest qro.ocir.io/ax6svbbnc2oh/open-ai-flask-app:latest"
+                    sh "docker push qro.ocir.io/ax6svbbnc2oh/open-ai-flask-app:latest"
                 }
             }
         }
