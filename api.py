@@ -45,6 +45,7 @@ def get_task_JSON():
             {"role": "user", "content": task_message}
         ]
     )
+    app.logger.info(str(datetime.datetime.now()))
     task_data = response.choices[0].message.content
     app.logger.info("returning:" + task_data)
     return task_data, 200, {'Content-Type': 'application/json'}
