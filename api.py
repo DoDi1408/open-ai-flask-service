@@ -37,7 +37,7 @@ def get_task_JSON():
         temperature=0.3,
         response_format={ "type": "json_object" },
         messages=[
-            {"role": "system", "content": "The current time is: " + str(datetime.datetime.now())},
+            {"role": "system", "content": "The current time is: " + str(datetime.datetime.now())  + " but minus 6 hours"},
             {"role": "system", "content": "Do not include hour on startDate or dueDate, format must be yyyy-MM-dd"},
             {"role": "system", "content": "You will receive text in spanish, make sure you dont subtitute letters with ñ or accents"},
             {"role": "system", "content": "You are a helpful assistant designed to output JSON. IT MUST have the following attributes. startDate, dueDate, description, title, stateTask (this one is always 0), and employee (this one is always null)"},
@@ -45,7 +45,6 @@ def get_task_JSON():
             {"role": "user", "content": task_message}
         ]
     )
-    app.logger.info(str(datetime.datetime.now()))
     task_data = response.choices[0].message.content
     app.logger.info("returning:" + task_data)
     return task_data, 200, {'Content-Type': 'application/json'}
