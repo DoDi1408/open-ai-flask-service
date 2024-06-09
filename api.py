@@ -32,6 +32,7 @@ def test():
 def get_task_JSON():
     app.logger.info('received a /task')
     d = datetime.today() - timedelta(hours=6)
+    d.strftime('%H:%M %p')
     app.logger.info(str(d))
     task_message = request.get_data(as_text=True)
     response = client.chat.completions.create(
